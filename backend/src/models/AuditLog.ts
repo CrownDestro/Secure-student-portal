@@ -24,7 +24,5 @@ const AuditLogSchema = new Schema<IAuditLog>({
   timestamp: { type: Date, default: Date.now, index: true },
 });
 
-// TTL index: auto-delete logs older than 90 days
-AuditLogSchema.index({ timestamp: 1 }, { expireAfterSeconds: 90 * 24 * 60 * 60 });
 
 export default mongoose.model<IAuditLog>('AuditLog', AuditLogSchema);
