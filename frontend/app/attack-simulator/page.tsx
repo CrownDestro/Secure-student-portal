@@ -44,54 +44,54 @@ const attacks = [
 ];
 
 const severityStyle: Record<string, string> = {
-  critical: 'bg-red-500/10 border-red-500/30 text-red-400',
-  high:     'bg-orange-500/10 border-orange-500/30 text-orange-400',
+  critical: 'bg-rose-50 border-rose-200 text-rose-700',
+  high:     'bg-amber-50 border-amber-200 text-amber-700',
 };
 
 export default function AttackSimulatorIndex() {
   return (
     <AuthGuard>
       <DashboardLayout>
-        <div className="p-8">
+        <div className="px-8 py-10">
           <div className="mb-8">
-            <div className="flex items-center gap-2 text-yellow-400 text-sm font-medium mb-2">
+            <div className="flex items-center gap-2 text-amber-600 text-sm font-medium mb-2">
               <AlertTriangle className="w-4 h-4" />
               Educational Environment — All attacks are simulated safely
             </div>
-            <h1 className="text-2xl font-bold text-white">Attack Simulation Dashboard</h1>
-            <p className="text-slate-400 mt-1">Understand how attacks work and how our secure implementation blocks them</p>
+            <h1 className="text-2xl font-semibold text-slate-900">Attack Simulation Dashboard</h1>
+            <p className="text-slate-500 mt-1">Understand how attacks work and how our secure implementation blocks them</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {attacks.map(({ href, icon: Icon, title, severity, owasp, desc, what }) => (
               <Link key={href} href={href}
-                className="group bg-slate-900 border border-slate-800 hover:border-slate-600 rounded-xl p-6 transition-all">
+                className="group card p-6 transition-all hover:border-slate-200 hover:shadow-[0_14px_30px_rgba(15,23,42,0.08)]">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-slate-300" />
+                  <div className="w-10 h-10 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-slate-700" />
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded">{owasp}</span>
+                    <span className="text-xs text-slate-600 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded">{owasp}</span>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded border uppercase ${severityStyle[severity]}`}>{severity}</span>
                   </div>
                 </div>
-                <h3 className="text-white font-semibold mb-2">{title}</h3>
-                <p className="text-slate-400 text-sm mb-4">{desc}</p>
+                <h3 className="text-slate-900 font-semibold mb-2">{title}</h3>
+                <p className="text-slate-500 text-sm mb-4">{desc}</p>
                 <div className="flex items-center justify-between">
-                  <p className="text-xs text-green-400">🛡 {what}</p>
-                  <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
+                  <p className="text-xs text-emerald-600">🛡 {what}</p>
+                  <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-colors" />
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="mt-8 bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <h2 className="text-white font-semibold mb-3">How to use this dashboard</h2>
-            <ol className="space-y-2 text-sm text-slate-400">
-              <li><span className="text-white font-medium">1. Choose an attack</span> — Click any card above to open the demo</li>
-              <li><span className="text-white font-medium">2. Switch modes</span> — Toggle between &quot;Vulnerable&quot; and &quot;Secure&quot; to see the difference</li>
-              <li><span className="text-white font-medium">3. Enter a payload</span> — Try the suggested payloads or create your own</li>
-              <li><span className="text-white font-medium">4. Read the explanation</span> — Understand why the attack fails in secure mode</li>
+          <div className="mt-8 card p-6">
+            <h2 className="text-slate-900 font-semibold mb-3">How to use this dashboard</h2>
+            <ol className="space-y-2 text-sm text-slate-500">
+              <li><span className="text-slate-900 font-medium">1. Choose an attack</span> — Click any card above to open the demo</li>
+              <li><span className="text-slate-900 font-medium">2. Switch modes</span> — Toggle between &quot;Vulnerable&quot; and &quot;Secure&quot; to see the difference</li>
+              <li><span className="text-slate-900 font-medium">3. Enter a payload</span> — Try the suggested payloads or create your own</li>
+              <li><span className="text-slate-900 font-medium">4. Read the explanation</span> — Understand why the attack fails in secure mode</li>
             </ol>
           </div>
         </div>

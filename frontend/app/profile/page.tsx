@@ -40,32 +40,32 @@ function ProfileInner() {
   };
 
   const roleColors: Record<string, string> = {
-    student: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-    teacher: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-    admin:   'bg-red-500/20 text-red-300 border-red-500/30',
+    student: 'bg-sky-100 text-sky-700 border-sky-200',
+    teacher: 'bg-violet-100 text-violet-700 border-violet-200',
+    admin:   'bg-rose-100 text-rose-700 border-rose-200',
   };
 
   return (
-    <div className="p-8 max-w-2xl">
-      <h1 className="text-2xl font-bold text-white mb-8">My Profile</h1>
+    <div className="px-8 py-10 max-w-2xl">
+      <h1 className="text-2xl font-semibold text-slate-900 mb-8">My Profile</h1>
 
       {/* Account info */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
-        <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-          <User className="w-4 h-4 text-blue-400" /> Account Information
+      <div className="card p-6 mb-6">
+        <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
+          <User className="w-4 h-4 text-sky-600" /> Account Information
         </h2>
         <div className="space-y-3">
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
+          <div className="flex justify-between items-center py-2 border-b border-slate-200">
             <span className="text-slate-400 text-sm">Name</span>
-            <span className="text-white text-sm font-medium">{user?.name}</span>
+            <span className="text-slate-900 text-sm font-medium">{user?.name}</span>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
+          <div className="flex justify-between items-center py-2 border-b border-slate-200">
             <span className="text-slate-400 text-sm">Email</span>
-            <span className="text-white text-sm font-medium">{user?.email}</span>
+            <span className="text-slate-900 text-sm font-medium">{user?.email}</span>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
+          <div className="flex justify-between items-center py-2 border-b border-slate-200">
             <span className="text-slate-400 text-sm">Role</span>
-            <span className={`text-xs px-2 py-0.5 rounded border font-medium ${roleColors[user?.role ?? 'student']}`}>
+            <span className={`text-[11px] px-2.5 py-0.5 rounded-full border font-medium uppercase tracking-wide ${roleColors[user?.role ?? 'student']}`}>
               {user?.role}
             </span>
           </div>
@@ -79,13 +79,13 @@ function ProfileInner() {
       </div>
 
       {/* Change password */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
-        <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-          <Lock className="w-4 h-4 text-yellow-400" /> Change Password
+      <div className="card p-6 mb-6">
+        <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-amber-600" /> Change Password
         </h2>
 
         {msg && (
-          <div className={`flex items-center gap-2 text-sm px-3 py-2.5 rounded-lg mb-4 ${msg.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/30' : 'bg-red-500/10 text-red-400 border border-red-500/30'}`}>
+          <div className={`flex items-center gap-2 text-sm px-3 py-2.5 rounded-lg mb-4 ${msg.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}`}>
             {msg.type === 'success' ? <CheckCircle className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
             {msg.text}
           </div>
@@ -103,23 +103,23 @@ function ProfileInner() {
                 type="password"
                 value={pw[key]}
                 onChange={e => setPw(p => ({ ...p, [key]: e.target.value }))}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-[var(--surface)] border border-slate-200 rounded-lg px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
                 required
               />
               {key === 'next' && <PasswordStrength password={pw.next} />}
             </div>
           ))}
           <button type="submit" disabled={loading}
-            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
+            className="bg-[var(--accent)] hover:bg-[#4369e6] disabled:opacity-50 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
             {loading ? 'Updating...' : 'Update Password'}
           </button>
         </form>
       </div>
 
       {/* Security info */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-        <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-          <Shield className="w-4 h-4 text-green-400" /> Session Security
+      <div className="card p-6">
+        <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
+          <Shield className="w-4 h-4 text-emerald-600" /> Session Security
         </h2>
         <div className="space-y-2 text-sm">
           {[
@@ -129,9 +129,9 @@ function ProfileInner() {
             ['XSS Protection',     'Token inaccessible to JavaScript'],
             ['CSRF Protection',    'SameSite=Strict blocks cross-origin requests'],
           ].map(([k, v]) => (
-            <div key={k} className="flex justify-between py-1.5 border-b border-slate-800/50">
+            <div key={k} className="flex justify-between py-1.5 border-b border-slate-200">
               <span className="text-slate-500">{k}</span>
-              <span className="text-green-400 text-xs font-mono text-right max-w-xs">{v}</span>
+              <span className="text-emerald-600 text-xs font-mono text-right max-w-xs">{v}</span>
             </div>
           ))}
         </div>

@@ -24,10 +24,10 @@ export default function AuthGuard({ children, allowedRoles }: Props) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400 text-sm">Verifying session...</p>
+          <div className="w-10 h-10 rounded-full border-2 border-slate-200 border-t-slate-900 animate-spin" />
+          <p className="text-slate-500 text-sm">Verifying session...</p>
         </div>
       </div>
     );

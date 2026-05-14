@@ -41,17 +41,17 @@ export default function UploadDemoPage() {
   return (
     <AuthGuard>
       <DashboardLayout>
-        <div className="p-8 max-w-4xl">
-          <Link href="/attack-simulator" className="flex items-center gap-1 text-slate-400 hover:text-white text-sm mb-6 transition-colors">
+        <div className="px-8 py-10 max-w-4xl">
+          <Link href="/attack-simulator" className="flex items-center gap-1 text-slate-500 hover:text-slate-900 text-sm mb-6 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Simulator
           </Link>
 
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center justify-center">
-              <Upload className="w-5 h-5 text-red-400" />
+            <div className="w-10 h-10 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center">
+              <Upload className="w-5 h-5 text-rose-600" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">Malicious File Upload Demo</h1>
+              <h1 className="text-xl font-semibold text-slate-900">Malicious File Upload Demo</h1>
               <p className="text-slate-400 text-sm">OWASP A04:2021 — Insecure Design</p>
             </div>
           </div>
@@ -85,8 +85,8 @@ multer({ fileFilter, limits: {
               <div className="flex flex-wrap gap-2">
                 {SCENARIOS.map(s => (
                   <button key={s.label} onClick={() => selectScenario(s)}
-                    className={`text-xs px-2.5 py-1.5 rounded-lg transition-all ${filename === s.filename && mimetype === s.mimetype
-                      ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'}`}>
+                    className={`text-xs px-2.5 py-1.5 rounded-lg transition-all border ${filename === s.filename && mimetype === s.mimetype
+                      ? 'bg-[var(--accent)] text-white border-transparent' : 'bg-white text-slate-500 border-slate-200 hover:text-slate-900'}`}>
                     {s.label}
                   </button>
                 ))}
@@ -97,17 +97,17 @@ multer({ fileFilter, limits: {
               <div>
                 <label className="block text-xs text-slate-500 mb-1">Filename</label>
                 <input value={filename} onChange={e => setFilename(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
               </div>
               <div>
                 <label className="block text-xs text-slate-500 mb-1">MIME type (Content-Type)</label>
                 <input value={mimetype} onChange={e => setMimetype(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
               </div>
             </div>
 
             <button onClick={run} disabled={loading || !filename}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors mb-4">
+              className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[#4369e6] disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors mb-4">
               {loading ? 'Checking...' : 'Run Security Checks'}
             </button>
 
@@ -115,13 +115,13 @@ multer({ fileFilter, limits: {
               <>
                 <ResultPanel blocked={result.blocked ?? false} explanation={result.explanation} />
                 {result.checks && (
-                  <div className="mt-4 bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
-                    <div className="px-4 py-2.5 border-b border-slate-800">
-                      <p className="text-sm font-medium text-white">Security Check Results</p>
+                  <div className="mt-4 bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div className="px-4 py-2.5 border-b border-slate-200">
+                      <p className="text-sm font-medium text-slate-900">Security Check Results</p>
                     </div>
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-slate-800 text-left">
+                        <tr className="border-b border-slate-200 text-left">
                           <th className="px-4 py-2 text-xs text-slate-500">Check</th>
                           <th className="px-4 py-2 text-xs text-slate-500">Value</th>
                           <th className="px-4 py-2 text-xs text-slate-500">Status</th>
@@ -130,13 +130,13 @@ multer({ fileFilter, limits: {
                       </thead>
                       <tbody>
                         {Object.entries(result.checks).map(([key, check]) => (
-                          <tr key={key} className="border-b border-slate-800/50">
-                            <td className="px-4 py-2.5 text-slate-400 text-xs font-medium capitalize">{key.replace(/([A-Z])/g, ' $1')}</td>
-                            <td className="px-4 py-2.5 text-slate-300 text-xs font-mono max-w-xs truncate">{check.value}</td>
+                          <tr key={key} className="border-b border-slate-100">
+                            <td className="px-4 py-2.5 text-slate-600 text-xs font-medium capitalize">{key.replace(/([A-Z])/g, ' $1')}</td>
+                            <td className="px-4 py-2.5 text-slate-700 text-xs font-mono max-w-xs truncate">{check.value}</td>
                             <td className="px-4 py-2.5">
                               {check.blocked
-                                ? <XCircle className="w-4 h-4 text-red-400" />
-                                : <CheckCircle className="w-4 h-4 text-green-400" />}
+                                ? <XCircle className="w-4 h-4 text-rose-600" />
+                                : <CheckCircle className="w-4 h-4 text-emerald-600" />}
                             </td>
                             <td className="px-4 py-2.5 text-slate-500 text-xs">{check.reason}</td>
                           </tr>

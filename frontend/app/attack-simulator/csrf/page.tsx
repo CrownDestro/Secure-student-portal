@@ -31,17 +31,17 @@ export default function CsrfDemoPage() {
   return (
     <AuthGuard>
       <DashboardLayout>
-        <div className="p-8 max-w-4xl">
-          <Link href="/attack-simulator" className="flex items-center gap-1 text-slate-400 hover:text-white text-sm mb-6 transition-colors">
+        <div className="px-8 py-10 max-w-4xl">
+          <Link href="/attack-simulator" className="flex items-center gap-1 text-slate-500 hover:text-slate-900 text-sm mb-6 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Simulator
           </Link>
 
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
-              <RefreshCw className="w-5 h-5 text-orange-400" />
+            <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center">
+              <RefreshCw className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">CSRF Demo</h1>
+              <h1 className="text-xl font-semibold text-slate-900">CSRF Demo</h1>
               <p className="text-slate-400 text-sm">OWASP A01:2021 — Broken Access Control</p>
             </div>
           </div>
@@ -69,15 +69,15 @@ res.cookie('token', jwt, {
             </div>
 
             {/* Attack scenario visualiser */}
-            <div className="mb-5 bg-slate-800/50 rounded-xl p-4">
-              <p className="text-sm text-slate-300 font-medium mb-3">Attack Scenario:</p>
+            <div className="mb-5 bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <p className="text-sm text-slate-800 font-medium mb-3">Attack Scenario:</p>
               <div className="flex items-center gap-3 text-sm text-slate-400 flex-wrap">
-                <div className="bg-red-500/10 border border-red-500/30 rounded px-3 py-2 text-red-300">
+                <div className="bg-rose-50 border border-rose-200 rounded px-3 py-2 text-rose-700">
                   👿 Attacker&apos;s Page<br/>
                   <span className="text-xs font-mono">{origin}</span>
                 </div>
                 <span className="text-slate-600">→ forged POST →</span>
-                <div className="bg-blue-500/10 border border-blue-500/30 rounded px-3 py-2 text-blue-300">
+                <div className="bg-sky-50 border border-sky-200 rounded px-3 py-2 text-sky-700">
                   🏫 Portal API<br/>
                   <span className="text-xs font-mono">localhost:5000/api/users/me</span>
                 </div>
@@ -89,7 +89,7 @@ res.cookie('token', jwt, {
               <div className="flex flex-wrap gap-2">
                 {SCENARIOS.map(s => (
                   <button key={s.origin} onClick={() => { setOrigin(s.origin); setResult(null); }}
-                    className={`text-xs px-3 py-2 rounded-lg font-mono transition-all ${origin === s.origin ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'}`}>
+                    className={`text-xs px-3 py-2 rounded-lg font-mono transition-all border ${origin === s.origin ? 'bg-[var(--accent)] text-white border-transparent' : 'bg-white text-slate-500 border-slate-200 hover:text-slate-900'}`}>
                     {s.label}
                   </button>
                 ))}
@@ -98,9 +98,9 @@ res.cookie('token', jwt, {
 
             <div className="flex gap-2">
               <input value={origin} onChange={e => setOrigin(e.target.value)}
-                className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="flex-1 bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-900 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
               <button onClick={run} disabled={loading}
-                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors">
+                className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[#4369e6] disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors">
                 {loading ? 'Sending...' : 'Simulate Request'}
               </button>
             </div>
